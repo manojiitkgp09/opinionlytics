@@ -9,7 +9,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100726151753) do
+ActiveRecord::Schema.define(:version => 20100729064053) do
+
+  create_table "apps", :force => true do |t|
+    t.string   "appname"
+    t.boolean  "role",       :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "authorizable_type"
+    t.integer  "authorizable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

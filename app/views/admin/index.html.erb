@@ -1,0 +1,8 @@
+<!-- app/views/user/my_account.rhtml -->
+<% if flash[:notice] %><div><u><%= flash[:notice] %></u></div><% end %>
+<h1>Account Info</h1>
+Your username is <%= User.find(session[:id]).name %>
+<%= button_to "    Survey    ", :controller => "surveys", :action => "new" %><%= button_to "         Survey          ", :controller => "surveys", :action => "show" %> <%= button_to "    Answer Survey   ", :controller => "surveys", :action => "answer" %> <%= button_to "Completed Survey", :controller => "questions", :action => "showresponse" %> 
+<% if @user.has_global_role? :admin %>
+<%= button_to "Change Survey Status", :controller => "surveys", :action => "update_status" %>
+<% end %>

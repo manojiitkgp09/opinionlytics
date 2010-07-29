@@ -2,9 +2,19 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  helper_method :has_global_role?
+
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   include AuthenticatedSystem
+  include PadlockAuthorization
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+
+  def has_global_role?(role_names)
+      has_role? role_names, App.first
+  end
+    
+
+
 end

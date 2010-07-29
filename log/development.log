@@ -146,3 +146,589 @@ Migrating to CreateSessions (20100726151753)
   [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100726151753')[0m
   [4;35;1mSQL (1.5ms)[0m   [0mCOMMIT[0m
   [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (22.4ms)[0m   [0mCREATE TABLE "roles" ("id" serial primary key, "name" character varying(255), "authorizable_type" character varying(255), "authorizable_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (10.3ms)[0m   [0;1mCREATE INDEX "index_roles_on_name" ON "roles" ("name")[0m
+  [4;35;1mSQL (2.5ms)[0m   [0mCREATE TABLE "roles_users" ("role_id" integer, "user_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100726160952')[0m
+  [4;35;1mSQL (2.3ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (7.8ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: relation "apps" does not exist
+LINE 1: insert into apps(appname,role) values('opinionlytics',1)
+ ^
+: insert into apps(appname,role) values('opinionlytics',1)[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: column "role" is of type boolean but default expression is of type integer
+HINT: You will need to rewrite or cast the expression.
+: CREATE TABLE "apps" ("id" serial primary key, "appname" character varying(255), "role" boolean DEFAULT 0, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: column "role" is of type boolean but default expression is of type integer
+HINT: You will need to rewrite or cast the expression.
+: CREATE TABLE "apps" ("id" serial primary key, "appname" character varying(255), "role" boolean DEFAULT 0, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: column "role" is of type boolean but default expression is of type integer
+HINT: You will need to rewrite or cast the expression.
+: CREATE TABLE "apps" ("id" serial primary key, "appname" character varying(255), "role" boolean DEFAULT 0, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: column "role" is of type boolean but default expression is of type integer
+HINT: You will need to rewrite or cast the expression.
+: CREATE TABLE "apps" ("id" serial primary key, "appname" character varying(255), "role" boolean DEFAULT 0, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+  [4;36;1mSQL (0.4ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (2979.6ms)[0m   [0mCREATE TABLE "apps" ("id" serial primary key, "appname" character varying(255), "role" boolean DEFAULT '0', "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1minsert into apps (appname,role) values('opinionlytics','1')[0m
+  [4;35;1mSQL (3.7ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100729045816')[0m
+  [4;36;1mSQL (2.6ms)[0m   [0;1mCOMMIT[0m
+Migrating to Adminuser (20100729064053)
+  [4;35;1mSQL (0.8ms)[0m   [0mBEGIN[0m
+  [4;36;1mUser Load (37.6ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'admin') LIMIT 1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'admin@opinionlytics.com') LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100729064053')[0m
+  [4;35;1mSQL (2.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing UsersController#index (for 127.0.0.1 at 2010-07-29 12:39:48) [GET]
+
+ActionController::UnknownAction (No action responded to index. Actions: access_denied, activate, check_roles, create, destroy, has_global_role?, has_role?, new, purge, role_requirements, role_requirements=, suspend, and unsuspend):
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing UsersController#index (for 127.0.0.1 at 2010-07-29 12:40:04) [GET]
+
+ActionController::UnknownAction (No action responded to index. Actions: access_denied, activate, check_roles, create, destroy, has_global_role?, has_role?, new, purge, role_requirements, role_requirements=, suspend, and unsuspend):
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2010-07-29 12:40:23) [GET]
+Rendering users/new
+Completed in 57ms (View: 35, DB: 8) | 200 OK [http://localhost/users/new]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing UsersController#create (for 127.0.0.1 at 2010-07-29 12:40:51) [POST]
+  Parameters: {"commit"=>"Sign up", "authenticity_token"=>"f5jCPDNuWpvuNnm21dZnjWFiO1GXLDp550ALKy+lJKU=", "user"=>{"password_confirmation"=>"manoj", "password"=>"manoj", "login"=>"manojagarwal", "email"=>"manoj.iitian@gmail.com"}}
+  [4;36;1mUser Load (1.4ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'manojagarwal') LIMIT 1[0m
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'manoj.iitian@gmail.com') LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'manojagarwal') LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'manoj.iitian@gmail.com') LIMIT 1[0m
+Rendering users/new
+Completed in 25ms (View: 6, DB: 7) | 200 OK [http://localhost/users]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing UsersController#create (for 127.0.0.1 at 2010-07-29 12:40:59) [POST]
+  Parameters: {"commit"=>"Sign up", "authenticity_token"=>"f5jCPDNuWpvuNnm21dZnjWFiO1GXLDp550ALKy+lJKU=", "user"=>{"password_confirmation"=>"manoja", "password"=>"manoja", "login"=>"manojagarwal", "email"=>"manoj.iitian@gmail.com"}}
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'manojagarwal') LIMIT 1[0m
+  [4;36;1mUser Load (0.8ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'manoj.iitian@gmail.com') LIMIT 1[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (18.5ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "activated_at", "crypted_password", "remember_token_expires_at", "updated_at", "deleted_at", "activation_code", "remember_token", "login", "email", "state") VALUES('', '0fbf75fb30c1e708982186e9b93efb9a1d728624', '2010-07-29 07:10:59.185795', NULL, '61c4155f9903e69e39c37e9eb684d94039a62020', NULL, '2010-07-29 07:10:59.185795', NULL, '564f320007bdfe3f7de83902a322d639d7c7c610', NULL, 'manojagarwal', 'manoj.iitian@gmail.com', 'pending') RETURNING "id"[0m
+Sent mail to manoj.iitian@gmail.com
+
+Date: Thu, 29 Jul 2010 12:40:59 +0530
+From: ADMINEMAIL
+To: manoj.iitian@gmail.com
+Subject: [YOURSITE] Please activate your new account
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Your account has been created.
+
+  Username: manojagarwal
+  Password: manoja
+
+Visit this url to activate your account:
+
+  http://YOURSITE/activate/4798b9b6627dbdb9c027e6e3220fbc845f29ae71
+  [4;35;1mSQL (1.2ms)[0m   [0mCOMMIT[0m
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'manojagarwal' AND "users".id <> 1) LIMIT 1[0m
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'manoj.iitian@gmail.com' AND "users".id <> 1) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed in 89ms (DB: 30) | 302 Found [http://localhost/users]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mApp Load (2.4ms)[0m   [0mSELECT * FROM "apps" LIMIT 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.5ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.4ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mDELETE FROM schema_migrations WHERE version = '20100729064053'[0m
+  [4;36;1mSQL (1.2ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: syntax error at end of input
+LINE 1: ...7c7c610', NULL, 'admin', 'admin@opinionlytics.com', 'active'
+ ^
+: INSERT INTO users (name, salt, created_at, activated_at, crypted_password, remember_token_expires_at, updated_at, deleted_at, activation_code, remember_token, login, email, state) VALUES('admin', '0fbf75fb30c1e708982186e9b93efb9a1d728624', '2010-07-29 07:10:59.185795', NULL, '61c4155f9903e69e39c37e9eb684d94039a62020', NULL, '2010-07-29 07:10:59.185795', NULL, '564f320007bdfe3f7de83902a322d639d7c7c610', NULL, 'admin', 'admin@opinionlytics.com', 'active'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.9ms)[0m   [0mINSERT INTO users (name, salt, created_at, activated_at, crypted_password, remember_token_expires_at, updated_at, deleted_at, activation_code, remember_token, login, email, state) VALUES('admin', '0fbf75fb30c1e708982186e9b93efb9a1d728624', '2010-07-29 07:10:59.185795', NULL, '61c4155f9903e69e39c37e9eb684d94039a62020', NULL, '2010-07-29 07:10:59.185795', NULL, '564f320007bdfe3f7de83902a322d639d7c7c610', NULL, 'admin', 'admin@opinionlytics.com', 'active')[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100729064053')[0m
+  [4;35;1mSQL (1.6ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-07-29 13:10:13) [GET]
+  Parameters: {"id"=>"login"}
+
+ActionController::UnknownAction (No action responded to show. Actions: access_denied, activate, check_roles, create, destroy, has_global_role?, has_role?, new, purge, role_requirements, role_requirements=, suspend, and unsuspend):
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.3ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing UsersController#index (for 127.0.0.1 at 2010-07-29 13:10:24) [GET]
+
+ActionController::UnknownAction (No action responded to index. Actions: access_denied, activate, check_roles, create, destroy, has_global_role?, has_role?, new, purge, role_requirements, role_requirements=, suspend, and unsuspend):
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-07-29 13:10:50) [GET]
+
+ActionController::UnknownAction (No action responded to index. Actions: access_denied, check_roles, create, destroy, has_global_role?, has_role?, new, role_requirements, and role_requirements=):
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.5ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSET standard_conforming_strings = on[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-07-29 13:10:54) [GET]
+Rendering sessions/new
+Completed in 27ms (View: 21, DB: 6) | 200 OK [http://localhost/sessions/new]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-07-29 13:11:00) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"f5jCPDNuWpvuNnm21dZnjWFiO1GXLDp550ALKy+lJKU=", "login"=>"admin", "password"=>"manoja"}
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed in 16ms (DB: 6) | 302 Found [http://localhost/session]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-07-29 13:11:13) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"f5jCPDNuWpvuNnm21dZnjWFiO1GXLDp550ALKy+lJKU=", "login"=>"manojagarwal", "password"=>"manoja"}
+  [4;35;1mUser Load (1.8ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'manojagarwal') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'manojagarwal' from 127.0.0.1 at Thu Jul 29 07:41:13 UTC 2010
+Rendering sessions/new
+Completed in 62ms (View: 2, DB: 6) | 200 OK [http://localhost/session]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-07-29 13:11:23) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"f5jCPDNuWpvuNnm21dZnjWFiO1GXLDp550ALKy+lJKU=", "login"=>"manojagarwal", "password"=>"manoja"}
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'manojagarwal') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'manojagarwal' from 127.0.0.1 at Thu Jul 29 07:41:23 UTC 2010
+Rendering sessions/new
+Completed in 9ms (View: 2, DB: 4) | 200 OK [http://localhost/session]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.4ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (2.2ms)[0m   [0mdelete from users where ('id' ='2')[0m
+  [4;36;1mSQL (1.6ms)[0m   [0;1mDELETE FROM schema_migrations WHERE version = '20100729064053'[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPGError: ERROR: duplicate key value violates unique constraint "index_users_on_login"
+: INSERT INTO users (name, salt, created_at, activated_at, crypted_password, remember_token_expires_at, updated_at, deleted_at, activation_code, remember_token, login, email, state) VALUES('admin', '0fbf75fb30c1e708982186e9b93efb9a1d728624', '2010-07-29 07:10:59.185795', NULL, '61c4155f9903e69e39c37e9eb684d94039a62020', NULL, '2010-07-29 07:10:59.185795', NULL, '564f320007bdfe3f7de83902a322d639d7c7c610', NULL, 'admin', 'admin@opinionlytics.com', 'active')[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.5ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.5ms)[0m   [0mINSERT INTO users (name, salt, created_at, activated_at, crypted_password, remember_token_expires_at, updated_at, deleted_at, activation_code, remember_token, login, email, state) VALUES('admin', '0fbf75fb30c1e708982186e9b93efb9a1d728624', '2010-07-29 07:10:59.185795', NULL, '61c4155f9903e69e39c37e9eb684d94039a62020', NULL, '2010-07-29 07:10:59.185795', NULL, '564f320007bdfe3f7de83902a322d639d7c7c610', NULL, 'admin', 'admin@opinionlytics.com', 'active')[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100729064053')[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.6ms)[0m   [0mdelete from users where (id ='2')[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mDELETE FROM schema_migrations WHERE version = '20100729064053'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mINSERT INTO users (name, salt, created_at, activated_at, crypted_password, remember_token_expires_at, updated_at, deleted_at, activation_code, remember_token, login, email, state) VALUES('admin', '0fbf75fb30c1e708982186e9b93efb9a1d728624', '2010-07-29 07:10:59.185795', NULL, '61c4155f9903e69e39c37e9eb684d94039a62020', NULL, '2010-07-29 07:10:59.185795', NULL, '564f320007bdfe3f7de83902a322d639d7c7c610', NULL, 'admin', 'admin@opinionlytics.com', 'active')[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100729064053')[0m
+  [4;35;1mSQL (1.5ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mdelete from users where id ='5' [0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mDELETE FROM schema_migrations WHERE version = '20100729064053'[0m
+  [4;35;1mSQL (1.5ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100726145041)
+Migrating to CreateSessions (20100726151753)
+Migrating to CreatePadlockRoles (20100726160952)
+Migrating to CreateApps (20100729045816)
+Migrating to Adminuser (20100729064053)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mINSERT INTO users (name, salt, created_at, activated_at, crypted_password, remember_token_expires_at, updated_at, deleted_at, activation_code, remember_token, login, email, state) VALUES('admin', '0fbf75fb30c1e708982186e9b93efb9a1d728624', '2010-07-29 07:10:59.185795', NULL, '61c4155f9903e69e39c37e9eb684d94039a62020', NULL, '2010-07-29 07:10:59.185795', NULL, '564f320007bdfe3f7de83902a322d639d7c7c610', NULL, 'admin', 'admin@opinionlytics.com', 'active')[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100729064053')[0m
+  [4;35;1mSQL (1.6ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mApp Load (1.9ms)[0m   [0mSELECT * FROM "apps" LIMIT 1[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-07-29 14:39:47) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"f5jCPDNuWpvuNnm21dZnjWFiO1GXLDp550ALKy+lJKU=", "login"=>"admin", "password"=>"manoja"}
+  [4;35;1mUser Load (1.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCOMMIT[0m
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/models/user.rb:53:in `isadmin?'
+  app/controllers/sessions_controller.rb:20:in `create'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (27.4ms)
+Rendered rescues/_request_and_response (50.7ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-07-29 14:42:23) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"f5jCPDNuWpvuNnm21dZnjWFiO1GXLDp550ALKy+lJKU=", "login"=>"admin", "password"=>"manoja"}
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCOMMIT[0m
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/models/user.rb:53:in `isadmin?'
+  app/controllers/sessions_controller.rb:21:in `create'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (23.5ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET standard_conforming_strings = on[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-07-29 14:42:27) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"f5jCPDNuWpvuNnm21dZnjWFiO1GXLDp550ALKy+lJKU=", "login"=>"admin", "password"=>"manoja"}
+  [4;35;1mUser Load (2.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCOMMIT[0m
+
+RuntimeError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id):
+  app/models/user.rb:53:in `isadmin?'
+  app/controllers/sessions_controller.rb:21:in `create'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (76.7ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
