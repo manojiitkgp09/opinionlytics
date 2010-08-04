@@ -1,0 +1,54 @@
+<div class="ez-wr">
+  <div class="ez-fl  ez-negmx ez-25">
+    <div class="ez-box">&nbsp</div>
+  </div>
+  <div class="ez-fl ez-negmr ez-50">
+    <div class="ez-box">
+<% form_for(:question_answer,:url => {:action => 'saveresponse', :controller => 'answers'}, :method =>:post) do |f| %>
+<div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color: #FFF;">
+  <% @question_surveys.each do |record| %> 
+  
+  <br>
+<div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #4096EE;"><b>
+    Question<%= @i=@i+1 %><%= "." %>&nbsp&nbsp <%= Question.find_by_id(record.question_id).question_details %><%= "?" %> &nbsp&nbsp</b></div>
+
+<% if Question.find_by_id(record.question_id).questiontype_id==1 %> 
+
+<div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #C3D9FF;"><b><br>Answer:</b><br>
+    <%= text_area('answer_text['+record.question_id.to_s+']','', :cols=>40,:rows=>3) %>
+    <!-- only one possible response -->
+    <% elsif  Question.find_by_id(record.question_id).questiontype_id==2 %>
+    
+    <div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #C3D9FF;"><b><br>Answer:</b><br>
+	<% Question.find_by_id(record.question_id).choice_details.split(' ').each do |choice| %>
+	<%= radio_button("answer_text",record.question_id,choice) %>
+	<%= choice %>
+	<% end %>
+	<!-- multiple possible response -->
+	<% else %>
+	<div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #C3D9FF;"><b>
+	    <br>Answer:</b><br>
+	    <% i=-1;Question.find_by_id(record.question_id).choice_details.split(' ').each do |choice| %>
+	    <%=  i=i+1;check_box("m_answer_text"+'['+record.question_id.to_s+']',i, {}, choice) %>
+	    <%= choice %>
+	    <% end %>
+	    <% end %>
+	    <%= hidden_field_tag('survey_id',params[:id]) %>
+	    <%= hidden_field_tag('question_id['+@i.to_s+']',record.question_id) %>
+	    <%= hidden_field_tag('questiontype_id['+record.question_id.to_s+']',Question.find_by_id(record.question_id).questiontype_id) %>
+	    <br><br></div>
+	<% end %><br>
+	<%= hidden_field_tag('count',@i) %>
+	<%= submit_tag('Answer') %>
+	<% end %>
+	<%= link_to "Cancel", :controller => "answers", :action => "show_for_response" %>
+    </div>
+</div>
+</div>					
+<div class="ez-last ez-oh">
+  <div class="ez-box">
+  </div>
+</div>
+    </div>
+    
+    

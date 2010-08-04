@@ -1,18 +1,53 @@
 <h1>Listing questions</h1>
-
-<table>
-  <tr>
-  </tr>
-
-<% @questions.each do |question| %>
-  <tr>
-    <td><%= link_to 'Show', question %></td>
-    <td><%= link_to 'Edit', edit_question_path(question) %></td>
-    <td><%= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New question', new_question_path %>
+<div class="ez-wr">
+  <div class="ez-fl  ez-negmx ez-25">
+    <div class="ez-box">&nbsp</div>
+  </div>
+  <div class="ez-fl ez-negmr ez-50">
+    <div class="ez-box">
+      <div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color: #FFF;">
+	<% @question_surveys.each do  
+	   |record| %>
+	
+	
+	<div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #4096EE;"><b><%= @i=@i+1 %><%= "." %>&nbsp&nbsp <%= Question.find(record.question_id).question_details %></b><%= "?" %><br></div>
+	<% if Question.find(record.question_id).questiontype_id == 1 %> <div class="ez-wr" style="height: 100px;width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #C3D9FF;"><%= text_area('','', :cols=>40,:rows=>3) %></div>
+	<% elsif Question.find(record.question_id).questiontype_id == 2 %>
+	<div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #C3D9FF;">
+	  <% Question.find(record.question_id).choice_details.split(/[\r][\n]/).each do |record2| %><%= radio_button('','',record2) %><%= record2 %><% end %></div>
+	<% else %>
+	
+	<div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #C3D9FF;">
+	  <% Question.find(record.question_id).choice_details.split(/[\r][\n]/).each do |record2| %><%= check_box('','', {}, record2) %><%= record2 %><% end %></div>
+	<% end %>
+	
+	<div class="ez-wr" style="width:130px;text-align: center;" > 
+	  <div class="ez-fl ez-negmr ez-50" >
+	    <div class="ez-box" style="display:inline;">
+	      <% form_for(:edit,:url => {:controller => 'questions', :action => 'edit', :id => record.question_id}, :method => :post) do |f| %>
+	      <%= hidden_field_tag('survey_id',params[:id]) %>
+	      <%= submit_tag('EDIT') %>
+	      <% end %>
+	    </div>
+	  </div>
+	  
+	  <div class="ez-fl ez-negmr ez-50"  >
+	    <div class="ez-box" style="display:inline;">
+	      <% form_for(:delete,:url => {:controller => 'questions', :action => 'destroy', :id => record.question_id}, :method => :post) do |f| %>
+	      <%= hidden_field_tag('survey_id',params[:id]) %>
+	      <%= submit_tag('DELETE') %> 
+	      <% end %>
+	    </div>
+	  </div>
+	</div>
+	<% end %>
+	
+	<%= link_to 'Back', @surveys %>
+      </div>
+    </div>
+  </div>					
+  <div class="ez-last ez-oh">
+    <div class="ez-box">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<h1>Current Roles </h1>
+<% @roles.each do |r| %>
+<%= r.name %><%= r.authorizable_type %><% if !r.title.nil? %><%= r.title %><% else %><%= r.appname %>
+<%= button_to "edit"

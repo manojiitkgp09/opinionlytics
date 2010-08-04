@@ -1,0 +1,29 @@
+<h1>Listing Users</h1>
+
+<table style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;width: 500px;">
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #4096EE;">
+<th align="left" width="20%" nowrap="nowrap" style="padding-left: 10px;">&nbsp;User Name</th>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;">&nbsp;Action</th>
+<th align="left" width="2%" nowrap="nowrap" style="padding-left: 10px;">
+Created &nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th align="left" width="2%" nowrap="nowrap" style="padding-left: 10px;">
+Modified &nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+</tr>
+
+
+<% @users.each do |user| %>
+
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #c3d9ff;">
+  <td><%= user.login %></td>
+  <td align = "center"><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+  <td><%= user.created_at %></td>
+  <td><%= user.updated_at %></td>
+
+ </tr>
+<% end %>
+</table>
+<br/>
+
+
+<%= link_to 'Back', new_session_path %>

@@ -1,0 +1,5 @@
+<% if flash[:notice] %><div><%= flash[:notice] %></div>
+<%= link_to "Home", :controller => 'Users', :action => 'my_account' %> <% end %>
+ <% if flash[:error] %><div><%= flash[:error] %></div>
+<%= link_to "Check responses", :controller => 'questions', :action => 'editresponse' %> 
+<% end %>

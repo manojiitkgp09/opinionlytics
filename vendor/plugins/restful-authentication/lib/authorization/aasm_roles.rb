@@ -8,11 +8,11 @@ module Authorization
       recipient.extend( StatefulRolesClassMethods )
       recipient.class_eval do
         include StatefulRolesInstanceMethods
-        include AASM
+      #  include AASM
         aasm_column :state
         aasm_initial_state :pending
         aasm_state :passive
-        aasm_state :pending, :enter => :make_activation_code
+        aasm_state :pending
         aasm_state :active,  :enter => :do_activate
         aasm_state :suspended
         aasm_state :deleted, :enter => :do_delete

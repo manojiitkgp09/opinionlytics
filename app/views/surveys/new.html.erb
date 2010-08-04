@@ -1,11 +1,21 @@
-<h1>New survey</h1>
+<div><%= error_messages_for :survey %></div>
 
-<% form_for(@survey) do |f| %>
-  <%= f.error_messages %>
+<h2>Create a Survey</h2>
 
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
+<%= form_tag('/surveys/create', :method =>:post) %>
 
-<%= link_to 'Back', surveys_path %>
+<b>Title</b><br>
+<%= text_field_tag('survey[title]','',:size =>20) %><br>
+
+<b>Category</b><br>
+<%= select_tag('survey[survey_category]','<option value="statistical">statistical</option><option value="paid">paid</option>') %><br>
+
+<b>Description</b><br>
+<%= text_area_tag('survey[description]',nil, :cols=>20,:rows=>5) %><br>
+
+<%= hidden_field_tag('survey[user_id]',current_user.id) %>
+
+<%= submit_tag('Continue') %>
+
+
+<%= link_to "Cancel", :controller => "users", :action => "index" %>

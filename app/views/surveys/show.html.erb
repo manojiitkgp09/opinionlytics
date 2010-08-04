@@ -1,3 +1,22 @@
+<h1>Survey Details</h1>
 
-<%= link_to 'Edit', edit_survey_path(@survey) %> |
+<table style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;">
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #4096EE;">
+<th align="left" width="30%" nowrap="nowrap"><b>Survey Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;</b> </th>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;"><b>Survey Category&nbsp&nbsp&nbsp&nbsp;</b></th>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;"><b>Survey Description</b></th>
+<% if !(QuestionSurvey.find(:all, :conditions => {:survey_id => params[:id]}).first.nil?) %>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;"><b>Show Questions</b></th>
+<% end %>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;"><b>Add Questions</b></th>
+
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #c3d9ff;">
+<td> <%= @survey.first.title %></td>
+<td><%= @survey.first.survey_category %></td>
+<td><%= @survey.first.description %></td>
+<% if !(QuestionSurvey.find(:all, :conditions => {:survey_id => params[:id]}).first.nil?) %>
+<td><%= link_to 'Show', :action=> "index", :controller=> "questions", :id=> params[:id] %></td>
+<% end %>
+<td><%= link_to 'Add', :action=> "select_type", :controller=> "questions", :id=> params[:id] %></td>
+</table>
 <%= link_to 'Back', surveys_path %>

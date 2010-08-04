@@ -1,0 +1,8 @@
+
+<% form_for(:createquestion,:url => {:action =>'new', :controller => 'questions', :id => @survey_id}, :method =>:post) do %>
+Select question type<br>
+<%= select("question","questiontype_id",QuestionType.all.collect {|q| [q.question_type,q.id]}) %><br><br>
+<%= submit_tag('Continue') %>
+<% end %>
+<p><%= link_to "Cancel", :controller => "surveys", :action => "show", :id => params[:id] %></p>
+

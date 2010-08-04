@@ -1,11 +1,21 @@
-<h1>New question</h1>
 
-<% form_for(@question) do |f| %>
-  <%= f.error_messages %>
+<% if @qtid == '1' %>
+<% form_for(:createftrq,:url => {:action =>'create', :controller => 'questions', :id => params[:id]}, :method =>:post) do %>
+Question<br>
+<%= text_area_tag('question[question_details]','',:row =>4, :column => 10) %><br>
 
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+<%= hidden_field_tag('question[questiontype_id]',@qtid) %>
+<%= submit_tag('Create') %>
 <% end %>
+<% else %>
+<% form_for(:createmtq,:url => {:action =>'create', :controller => 'questions', :id => @survey_id}, :method =>:post) do |f| %>
+Question<br>
 
-<%= link_to 'Back', questions_path %>
+<%= text_area_tag('question[question_details]','',:row =>4, :column => 10) %><br>
+Answer choices (each choice on a seperate line) <br>
+<%= text_area_tag('question[choice_details]','',:row =>4, :column => 10) %><br>
+<%= hidden_field_tag('question[questiontype_id]',@qtid) %>
+<%= submit_tag('Create') %>
+<% end %>
+<% end %>
+<p><%= link_to "Cancel", :controller => "questions", :action => "select_type", :id => params[:id] %>

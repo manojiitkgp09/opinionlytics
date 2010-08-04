@@ -1,11 +1,13 @@
 <h1>Editing survey</h1>
-
 <% form_for(@survey) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+SurveyName<br>
+<%= text_field_tag('survey[title]',@survey.title,:size =>20) %><br>
+SurveyCategory&nbsp&nbsp<br>
+<%= select("survey", "survey_category",%w[statistical paid],{:selected => @survey.survey_category}) %><br>
+SurveyDescription<br>
+<%= text_area_tag('survey[description]',@survey.description, :cols=>20,:rows=>5) %><br>
+<%= hidden_field_tag('survey[user_id]',current_user.id) %>
+<%= submit_tag('Update') %>
 <% end %>
 
 <%= link_to 'Show', @survey %> |

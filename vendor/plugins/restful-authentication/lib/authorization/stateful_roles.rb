@@ -8,7 +8,7 @@ module Authorization
       recipient.extend( StatefulRolesClassMethods )
       recipient.class_eval do
         include StatefulRolesInstanceMethods
-        
+        puts "I was here"
         acts_as_state_machine :initial => :pending
         state :passive
         state :pending, :enter => :make_activation_code
@@ -17,6 +17,7 @@ module Authorization
         state :deleted, :enter => :do_delete
 
         event :register do
+          puts "Control was here"
           transitions :from => :passive, :to => :pending, :guard => Proc.new {|u| !(u.crypted_password.blank? && u.password.blank?) }
         end
         

@@ -1,7 +1,20 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
+before_filter :check_if_login, :only => 'new'
 
-
+  def check_if_login
+    if current_user
+     puts "----CAME HERE----"
+      if current_user.isadmin?
+        redirect_to :controller => 'admin', :action => 'index'
+      else
+        puts "came here"
+        redirect_to :controller => 'users', :action => 'index'
+      end
+    else
+      render :action => 'new'
+    end
+  end
   # render new.erb.html
   def new
   end
@@ -19,7 +32,7 @@ class SessionsController < ApplicationController
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
       if current_user.isadmin?
-        redirect_back_or_default('/admin/')
+        redirect_back_or_default('/admin/index/')
       else
         redirect_back_or_default('/users/')
       end
@@ -35,7 +48,7 @@ class SessionsController < ApplicationController
   def destroy
     logout_killing_session!
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default('/')
+    redirect_back_or_default('/login')
   end
 
 protected

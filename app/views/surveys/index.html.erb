@@ -1,18 +1,48 @@
 <h1>Listing surveys</h1>
 
-<table>
-  <tr>
-  </tr>
+<table style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;">
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #4096EE;">
+
+<th align="left" width="30%" nowrap="nowrap">&nbsp;Survey Title</th>
+<% if current_user.isadmin? %>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;">&nbsp;Change Status</th>
+<% end %>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;">
+Created &nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;">
+Modified &nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th width="5%">&nbsp;&nbsp;Show&nbsp;&nbsp;&nbsp;</th>
+<th width="5%">&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;</th>
+<th width="5%">&nbsp;&nbsp;Analyze&nbsp;</th>
+<th width="10%" >&nbsp;Actions&nbsp;</th>
+
+</tr></div>
+
 
 <% @surveys.each do |survey| %>
-  <tr>
-    <td><%= link_to 'Show', survey %></td>
-    <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
-    <td><%= link_to 'Destroy', survey, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #c3d9ff;">
+  <td><%= survey.title %></td>
+  <% if current_user.isadmin? %>
+  <td align = "center"><% if survey.status == true %><%= link_to 'disable', :controller => 'surveys', :action => 'enb_disb', :id => survey.id %>
+    <% else %><%= link_to 'enable', :controller => 'surveys', :action => 'enb_disb', :id => survey.id %><% end %>
+    <% end %> </td>
+  <td><%= survey.created_at %></td>
+  <td>
+<%= survey.updated_at %>
+</td>
+  <td align = "center"><%= link_to 'Show', survey %></td>
+  <td align = "center"><%= link_to 'Edit', edit_survey_path(survey) %></td>
+  <td></td>
+  <td align = "center"><%= link_to 'Destroy', survey, :confirm => 'Are you sure?', :method => :delete %></td>
+
+</tr>
 <% end %>
 </table>
+<br/>
 
-<br />
 
-<%= link_to 'New survey', new_survey_path %>
+<%= link_to 'Back', new_session_path %>
+
+
+

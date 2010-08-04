@@ -1,0 +1,33 @@
+<h1>Listing Questions</h1>
+
+<table style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;">
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #4096EE;">
+<th align="left" width="40%" nowrap="nowrap" style="padding-left: 10px;">&nbsp;Question</th>
+<% if current_user.isadmin? %>
+<th align="left" width="20%" nowrap="nowrap" style="padding-left: 10px;">&nbsp;Change Status</th>
+<% end %>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;">
+Created &nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th align="left" width="10%" nowrap="nowrap" style="padding-left: 10px;">
+Modified &nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+<th width="10%" >&nbsp;Actions&nbsp;</th>
+
+</tr>
+
+
+<% @questions.each do |question| %>
+
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #c3d9ff;">
+  <td><%= question.question_details %></td>
+   <td ><% if question.status == true %><%= link_to 'disable', :controller => 'questions', :action => 'enb_disb', :id => question.id %>
+    <% else %><%= link_to 'enable', :controller => 'questions', :action => 'enb_disb', :id => question.id %><% end %>
+     </td>
+  <td><%= question.created_at %></td>
+  <td><%= question.updated_at %></td>
+  <td align = "center"><%= link_to 'delete',  :controller => 'questions', :action => 'destroy', :id => question.id %></td>
+ </tr>
+<% end %>
+</table>
+<br/>
+<%= link_to 'Back', new_session_path %>

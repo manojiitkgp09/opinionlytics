@@ -1,26 +1,16 @@
 class AdminController < ApplicationController
+   before_filter :login_required
+  padlock(:on => :all) { current_user.isadmin? }
   def index
     @user=User.find_by_id(current_user.id)
   end
 
-  def enable_survey
-    @survey=Survey.find_by_id(params[:id])
-    @survey.update_attributes(params[:enable])
+  def manage_users
+    @users=User.find_by_sql("select * from users where (id <> #{current_user.id}) and state <> 'deleted'")
   end
 
-  def disable_survey
-    @survey=Survey.find_by_id(params[:id])
-    @survey.update_attributes(params[:enable])
-  end
-
-  def enable_question
-    @qs=QuestionSurveys.find_by_id(params[:id])
-    @qs.update_attributes(params[:enable])
-  end
-  
-  def disable_question
-    @qs=QuestionSurveys.find_by_id(params[:id])
-    @qs.update_attributes(params[:enable])
+  def edit_role
+    @roles=User.find_current_roles(params[:id])
   end
 
 

@@ -1,0 +1,33 @@
+<h1>New answer</h1>
+<% form_for(:question_answer,:url => {:action => 'create', :controller => 'answers'}, :method =>:post) do |f| %><% @question_surveys.each do |record| %> 
+<br>Question<%= @i=@i+1 %><%= "." %>&nbsp&nbsp <%= Question.find_by_id(record.question_id).question_details %><%= "?" %> &nbsp&nbsp
+<%= puts Question.find_by_id(record.question_id).questiontype_id %>
+<% if Question.find_by_id(record.question_id).questiontype_id==1 %> 
+
+<br>Answer:
+ <%= text_area('answer_text['+record.question_id.to_s+']','', :cols=>40,:rows=>3) %>
+<!-- only one possible response -->
+<% elsif  Question.find_by_id(record.question_id).questiontype_id==2 %>
+
+<br>Answer:
+<% Question.find_by_id(record.question_id).choice_details.split(' ').each do |choice| %>
+<%= radio_button("answer_text",record.question_id,choice) %>
+<%= choice %>
+<% end %>
+<!-- multiple possible response -->
+ <% else %>
+<br>Answer:
+<% i=-1;Question.find_by_id(record.question_id).choice_details.split(' ').each do |choice| %>
+ <%=  i=i+1;check_box("m_answer_text"+'['+record.question_id.to_s+']',i, {}, choice) %>
+<%= choice %>
+<% end %>
+<% end %>
+<%= hidden_field_tag('survey_id',params[:id]) %>
+<%= hidden_field_tag('question_id['+@i.to_s+']',record.question_id) %>
+<%= hidden_field_tag('questiontype_id['+record.question_id.to_s+']',Question.find_by_id(record.question_id).questiontype_id) %>
+<br><br>
+<% end %><br>
+<%= hidden_field_tag('count',@i) %>
+<%= submit_tag('Submit') %>
+<% end %>
+<%= link_to "Go Back", :controller => "answer", :action => "index" %>

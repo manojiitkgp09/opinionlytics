@@ -1,12 +1,17 @@
 <h1>Editing question</h1>
+<h1>Question details</h1>
+<% form_for(:question,:url => {:action =>'update', :controller => 'questions', :id => @question.id}, :method =>:post) do |f| %>
+Question<br>
 
-<% form_for(@question) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+<%= text_area_tag('question[question_details]',@question.question_details,:size =>50) %><br>
+<% if @question.questiontype_id != 1 %> 
+Choices (each should be on seperate line)<br>
+<%= text_area_tag('question[choice_details]',@question.choice_details,:size =>50) %><br>
 <% end %>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>
+<%= hidden_field_tag('survey_id',@survey_id) %>
+<%= hidden_field_tag('question[questiontype_id]',@question.questiontype_id) %>
+<%= submit_tag('Update') %>
+<% end %>
+<p><%= link_to "Done", :controller => "questions", :action => "index", :id => params[:id] %>
+

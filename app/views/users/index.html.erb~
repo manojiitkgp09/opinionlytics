@@ -1,0 +1,9 @@
+
+
+<%= button_to "Create Survey", :controller => "surveys", :action => "new" %>
+<% if @survey %>
+<div class="ez-box"><%= link_to "Show Surveys","/surveys"  %></div>
+<div class="ez-box"><%= link_to "Answer other Surveys",:controller => 'answers', :action => 'show_for_response'  %></div>
+<% end %>
+<br><br>
+

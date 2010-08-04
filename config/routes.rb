@@ -1,12 +1,15 @@
+# -*- coding: undecided -*-
 ActionController::Routing::Routes.draw do |map|
-  map.resources :questions
 
   map.resources :surveys
-
+  map.root :controller => 'users', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
+  map.select_type '/select_type', :controller => 'questions', :action => 'select_type'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.signup '/signup', :controller => 'users', :action => 'new'
-  
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
+
+
   map.resources :users, :member => { :suspend   => :put, :unsuspend => :put, :purge => :delete }
   map.resource :session
 

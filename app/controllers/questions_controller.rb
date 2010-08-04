@@ -1,31 +1,31 @@
 class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.xml
-  padlock(:on => :index) { has_global_role? :admin }
-  padlock(:on => :edit) { has_role? :surveyor, Survey.find(params[:id])|| has_global_role? :admin}
-  padlock(:on => :new) { has_role? :surveyor, Survey.new}
-  padlock(:on => :create) { has_global_role? :surveyor, Survey.new}
-  padlock(:on => :update) { has_role? :surveyor, Survey.find(params[:id]) || has_global_role? :admin}
-  padlock(:on => :show) { has_role? :surveyor, Survey.find(params[:id]) || has_global_role? :admin}
-  padlock(:on => :destroy) { has_role? :surveyor, Survey.find(params[:id]) || has_global_role? :admin}
-  padlock(:on => :enb_disb) { has_global_role? :admin}
+  before_filter :login_required
 
+  padlock(:on => :index) {  current_user.isadmin? || (has_role? :surveyor, Survey.find(params[:id])) }
+  padlock(:on => :edit) {  current_user.isadmin? || (has_role? :surveyor,Survey.find(params[:survey_id])) }
+  padlock(:on => :new) { !(current_user.nil?) }
+  padlock(:on => :create) { !(current_user.nil?) }
+  padlock(:on => :update) { current_user.isadmin? || (has_role? :surveyor, Survey.find(params[:survey_id]))  }
+  padlock(:on => :show) { current_user.isadmin? || (has_role? :surveyor, Survey.find(params[:id]))  }
+  padlock(:on => :destroy) {  current_user.isadmin? || (has_role? :surveyor, Survey.find(params[:survey_id]))}
+  padlock(:on => :enb_disb) { current_user.isadmin?}
+  padlock(:on => :show_for_admin) { current_user.isadmin?}
+
+  def show_for_admin
+    @questions = Question.all
+  end
+  
   def index
     @i=0
-    @question_surveys=QuestionSurvey.find(:all, :conditions => {:survey_id => params[:id] })
-    @questions=Question.new
+    @surveys = Survey.find_by_id(params[:id])
+    @question_surveys=QuestionSurvey.find(:all, :conditions => {:survey_id => params[:id]})
+    @questions = [];
     @question_surveys.each do
       |q| 
-      @questions=Question.find(:first, :conditions => {:id => q.id})
+      @questions.push(Question.find(:first, :conditions => {:id => q.id, :status => true}))
     end    
-=begin
-@questions = QuestionSurvey.find(:all, :conditions => {:survey_id => params[:id]})
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @questions }
-    end
-  end
-=end
   end
   # GET /questions/1
   # GET /questions/1.xml
@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
     @qtid=params[:question][:questiontype_id]
 #    puts @qtid
     @survey_id=params[:id]
- #   puts @survey_id
+    puts @survey_id
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @question }
@@ -52,53 +52,54 @@ class QuestionsController < ApplicationController
   end
 
   # GET /questions/1/edit
+
+   
   def edit
     @question = Question.find(params[:id])
     @survey_id = params[:survey_id]
   end
 
+
   # POST /questions
   # POST /questions.xml
   def create
-    @question = Question.new(params[:question])
+   # @question = Question.new(params[:question])
+    puts params[:id]
     @q1=Question.create(params[:question])
     if @q1.errors.empty?                # => false
       if !(@q1.id.nil?)
         QuestionSurvey.create({:question_id => @q1.id, :survey_id => params[:id]})
-        flash[:message] = 'Question Created,Create another one'
-        redirect_to :action => 'selecttype', :id => params[:id]
+        flash[:notice] = 'Question Created,Create another one'
+        puts "params[:id]"
+        redirect_to :action => 'select_type', :id => params[:id]
       else
         @q2=Question.find(:first, :conditions => "question_details='#{params[:question][:question_details]}'")
         @qs1=QuestionSurvey.create({:question_id => @q2.id, :survey_id => params[:id]})
-        flash[:message] = 'Question Created,Create another one'
-        redirect_to :action => 'selecttype', :id => params[:id]
+        flash[:notice] = 'Question Created,Create another one'
+        puts "params[:id]"
+        redirect_to :action => 'select_type', :id => params[:id]
       end
     else
-      flash[:qempty] =@q1.errors.on "question_details"  
-      if params[:question][:questiontype_id]!=1
-        flash[:cempty]=@q1.errors.on "choice_details"
-        redirect_to :action => 'selecttype', :id => params[:id]
+
+      if params[:question][:questiontype_id] != "1"
+        
+        flash[:error] ="Question "+(@q1.errors.on(:question_details).to_s)
+        flash[:error] ="Choice "+(@q1.errors.on(:choice_details).to_s)
+
+        redirect_to :action => 'select_type', :id => params[:id]
       else
-      redirect_to :action => 'selecttype', :id => params[:id]
+        flash[:error] ="Question "+(@q1.errors.on "question_details".to_s)
+
+      redirect_to :action => 'select_type', :id => params[:id]
       end
     end   
-=begin
-    respond_to do |format|
-      if @question.save
-        format.html { redirect_to(@question, :notice => 'Question was successfully created.') }
-        format.xml  { render :xml => @question, :status => :created, :location => @question }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @question.errors, :status => :unprocessable_entity }
-      end
-    end
-=end
+
   end
 
   # PUT /questions/1
   # PUT /questions/1.xml
   def update
- @question_surveys=QuestionSurvey.find(:all, :conditions => {:question_id => params[:id]}, :limit => 2)
+    @question_surveys=QuestionSurvey.find(:all, :conditions => {:question_id => params[:id]}, :limit => 2)
     if @question_surveys.length > 1      #multiple surveys accessing the "question to be updated"
       @question_surveys=QuestionSurvey.find(:first, :conditions => {:question_id => params[:id], :survey_id => params[:survey_id]})
       QuestionSurvey.delete(@question_surveys.id)
@@ -106,64 +107,57 @@ class QuestionsController < ApplicationController
       puts @q1
       if !(@q1.id.nil?)
         QuestionSurvey.create({:question_id => @q1.id, :survey_id => params[:survey_id]})
-        flash[:message] = 'Question Updated'
-        redirect_to :controller => 'questions', :action => 'show', :id => params[:survey_id]
+        flash[:notice] = 'Question Updated'
+        redirect_to :controller => 'questions', :action => 'index', :id => params[:survey_id]
       else
         @q2=Question.find(:first, :conditions => "question_details='#{params[:question][:question_details]}'")
         @qs1=QuestionSurvey.create({:question_id => @q2.id, :survey_id => params[:survey_id]})
-        flash[:message] = 'Question Updated'
-        redirect_to :controller => 'questions', :action => 'show', :id => params[:survey_id]
+        flash[:notice] = 'Question Updated'
+        redirect_to :controller => 'questions', :action => 'index', :id => params[:survey_id]
       end
     else
       puts params[:survey_id]
       @question = Question.find(params[:id])
       if @question.update_attributes(params[:question])  
-        redirect_to :controller => 'questions', :action => 'show', :id => params[:survey_id]
+        redirect_to :controller => 'questions', :action => 'index', :id => params[:survey_id]
       else 
-        redirect_to :controller => 'questions', :action => 'show', :id => params[:survey_id]
+        redirect_to :controller => 'questions', :action => 'index', :id => params[:survey_id]
       end 
     end
-=begin       
- @question = Question.find(params[:id])
-
-    respond_to do |format|
-      if @question.update_attributes(params[:question])
-        format.html { redirect_to(@question, :notice => 'Question was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @question.errors, :status => :unprocessable_entity }
-      end
-    end
-=end
   end
 
   # DELETE /questions/1
   # DELETE /questions/1.xml
   def destroy
-  @question_surveys=QuestionSurvey.find(:first, :conditions => {:question_id => params[:id],:survey_id => params[:survey_id] })
-    QuestionSurvey.delete(@question_surveys.id)
-    @qias=QuestionSurvey.find(:first, :conditions => {:question_id => params[:id]}) #find if the question exist in another survey
-    if @qias.nil?
-      Question.delete(params[:id])                           # if it does not exist delete it from question table also
+    if !current_user.isadmin?
+      @question_surveys=QuestionSurvey.find(:first, :conditions => {:question_id => params[:id],:survey_id => params[:survey_id] })
+      QuestionSurvey.delete(@question_surveys.id)
+      @qias=QuestionSurvey.find(:first, :conditions => {:question_id => params[:id]}) #find if the question exist in another survey
+      if @qias.nil?
+        Question.delete(params[:id])                           # if it does not exist delete it from question table also
+      end
+      redirect_to :controller => 'questions', :action => 'index', :id => params[:survey_id]  
+    else
+      @question_surveys=QuestionSurvey.find(:first, :conditions => {:question_id => params[:id]})
+      QuestionSurvey.delete(@question_surveys.id)
+      Question.delete(params[:id])           
+      redirect_to :action => 'show_for_admin'  
     end
-    redirect_to :controller => 'questions', :action => 'show', :id => params[:survey_id]  
-=begin
-  @question = Question.find(params[:id])
-    @question.destroy
-    respond_to do |format|
-      format.html { redirect_to(questions_url) }
-      format.xml  { head :ok }
-    end
-=end
+      
   end
 
-  def selecttype
+  def select_type
     @survey_id=params[:id]
   end
 
   def enb_disb
-    @question=QuestionSurvey.find(:first, :survey_id => params[:survey_id] && :question_id => params[:question_id])
-    @question.update_attributes(params[:status])
+    @question=Question.find_by_id(params[:id])
+    if @question.status == true
+      @question.update_attributes(:status => false)      
+    else
+      @question.update_attributes(:status => true)
+    end
+    redirect_to :action => "show_for_admin"
   end
+
 end

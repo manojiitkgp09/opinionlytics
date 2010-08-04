@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   include Authorization::StatefulRoles
   acts_as_authorized_user
 
+  has_many :surveys
+
+    
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
   validates_uniqueness_of   :login
@@ -50,13 +53,19 @@ class User < ActiveRecord::Base
   end
 
   def isadmin?
-    has_role? :admin, @app 
+    has_role? :admin, App.first 
+  end
+
+  def find_current_roles(user_id)
+   find_by_sql("select roles.name,roles.authorizable_id,roles.authorizable_type,surveys.title,apps.name from roles,roles_users,surveys,apps where roles_users.user_id = user_id and roles.id =roles_users.role_id and (roles.authorizable_id = 'survey.id' or roles.authorizable_id = 'apps.id' ")
   end
 
     protected
       def make_activation_code
+        return if activation_code 
         self.deleted_at = nil
         self.activation_code = self.class.make_token
+        puts self.activation_code
       end
   
 end

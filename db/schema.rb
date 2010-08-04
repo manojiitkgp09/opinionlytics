@@ -9,11 +9,48 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100729064053) do
+ActiveRecord::Schema.define(:version => 20100801144717) do
+
+  create_table "answer_questions", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "answer_id"
+    t.string   "answer_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "answers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "survey_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "apps", :force => true do |t|
     t.string   "appname"
     t.boolean  "role",       :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "question_surveys", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "survey_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "question_types", :force => true do |t|
+    t.string   "question_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", :force => true do |t|
+    t.string   "question_details"
+    t.integer  "questiontype_id"
+    t.string   "choice_details",   :default => "xxx"
+    t.boolean  "status",           :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,6 +81,16 @@ ActiveRecord::Schema.define(:version => 20100729064053) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "surveys", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "survey_category"
+    t.boolean  "status",          :default => true
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40

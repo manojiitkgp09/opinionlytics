@@ -1,0 +1,15 @@
+<h1> Surveys to Answer</h1><br>
+<table style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;">
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #4096EE;">
+<th align="left" width="30%" nowrap="nowrap"><b>Survey Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;</b> </th>
+<th align="left" width="30%" nowrap="nowrap"><b>Action&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;</b> </th>
+</tr>
+<% @surveys.each do 
+ |survey| %>
+<tr style="margin-bottom: 10px;border-width: 1px; border-style: solid; border-color:#000;background-color: #c3d9ff;">
+<td><%= survey.title %></td>
+<td><%= link_to "Answer", :controller => "answers", :action => "answerq", :id => survey.id  %></td>
+</tr>
+<% end %>
+</table>
+<%= link_to "Cancel", :controller => "users", :action => "index" %>
