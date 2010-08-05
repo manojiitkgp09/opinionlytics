@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   # GET /questions.xml
   before_filter :login_required
 
-  padlock(:on => :index) {  current_user.isadmin? || (has_role? :surveyor, Survey.find(params[:id])) }
+#  padlock(:on => :index) {  current_user.isadmin? || (has_role? :surveyor, Survey.find(params[:id])) }
   padlock(:on => :edit) {  current_user.isadmin? || (has_role? :surveyor,Survey.find(params[:survey_id])) }
   padlock(:on => :new) { !(current_user.nil?) }
   padlock(:on => :create) { !(current_user.nil?) }

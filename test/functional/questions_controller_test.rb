@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class QuestionsControllerTest < ActionController::TestCase
+fixtures :users, :surveys
   test "should get index" do
+    
+    session[:user_id] = users(:quentin)
+    Role.create(:name => 'surveyor', :authorizable_type => 'Survey', :authorizable_id => surveys(:s2).id)
     get :index
     assert_response :success
     assert_not_nil assigns(:questions)

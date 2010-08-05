@@ -96,6 +96,7 @@ class SurveysController < ApplicationController
     @survey = Survey.find(params[:id])
     @user = User.find_by_id(@survey.user_id)
     @survey.question_surveys.destroy_all
+    
     @survey.destroy
     if @survey.destroy
       @user.has_no_role "surveyor", @survey

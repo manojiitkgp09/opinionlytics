@@ -1,16 +1,16 @@
 class AnswersController < ApplicationController
 
-before_filter :login_required
-
+  before_filter :login_required
+  
   def show_for_response
-    @surveys = Survey.find_by_sql("select * from surveys where user_id <> #{current_user.id}")
-@survey=[]
+    @surveys = Survey.find_by_sql("select * from surveys where user_id <> #{current_user.id} and status = 'true'")
+    @survey=[]
     @surveys.each do |s|
       if ((Answer.find(:first, :conditions => {:survey_id => s.id, :user_id => current_user.id }).nil?) && !(QuestionSurvey.find(:first, :conditions => { :survey_id => s.id }).nil?))
-                        @survey.push(s) 
-                      end
-                                        
+        @survey.push(s) 
+      end
     end
+    
     if @survey.first.nil? 
       flash[:error]="There is no survey to which you can respond"
       redirect_back_or_default("/users")
@@ -21,26 +21,28 @@ before_filter :login_required
     @i=0
     @survey_id=params[:id]
     @question_surveys=QuestionSurvey.find(:all, :conditions => {:survey_id => params[:id] })
-    if @question_surveys.first.nil?
+
+=begin    
+if @question_surveys.first.nil?
         flash[:error] = "No Survey found"
-      redirect_to :action => 'answer', :controller => 'surveys'
+      redirect_to "/users"
+
     end    
+=end
   end
   
   def saveresponse
     @answer=Answer.create(:user_id => current_user.id, :survey_id => params[:survey_id])
     for j in params[:question_id].values 
-      @question_answer=AnswerQuestion.new
-      puts "#{params[:questiontype_id][:j]}#######"
-     if (params[:questiontype_id][j] != '3')
-       @q1=AnswerQuestion.create(:answer_id => @answer.id, :question_id => j, :answer_text => params[:answer_text][j])
-     else
-       params[:m_answer_text][j].each_value do |record|
+      if (params[:questiontype_id][j] != '3')
+        @q1=AnswerQuestion.create(:answer_id => @answer.id, :question_id => j, :answer_text => params[:answer_text][j])
+      else
+        params[:m_answer_text][j].each_value do |record|
           if record!="0"
             @q1=AnswerQuestion.create(:answer_id => @answer.id, :question_id => j, :answer_text => record)
           end
         end
-     end
+      end
       if @q1.nil?
         chk=1
         break
@@ -52,10 +54,11 @@ before_filter :login_required
       flash[:notice] = "Thank you for completing the survey"
     else
       flash[:error] = "There are some unfilled responses"
-      
     end
+    
   end
-  
+
+=begin  
   def showresponse
 
     @compsurvey=Answer.find(:all, :conditions => {:user_id => current_user.id})
@@ -232,4 +235,6 @@ before_filter :login_required
       format.xml  { head :ok }
     end
   end
+end
+=end
 end

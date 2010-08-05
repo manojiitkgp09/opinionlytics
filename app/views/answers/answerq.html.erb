@@ -20,7 +20,7 @@
     <% elsif  Question.find_by_id(record.question_id).questiontype_id==2 %>
     
     <div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #C3D9FF;"><b><br>Answer:</b><br>
-	<% Question.find_by_id(record.question_id).choice_details.split(' ').each do |choice| %>
+	<% Question.find_by_id(record.question_id).choice_details.split(/[\r][\n]/).each do |choice| %>
 	<%= radio_button("answer_text",record.question_id,choice) %>
 	<%= choice %>
 	<% end %>
@@ -28,7 +28,7 @@
 	<% else %>
 	<div class="ez-wr" style="width: 700px;border-width: 1px; border-style: solid; border-color:#000;background-color: #C3D9FF;"><b>
 	    <br>Answer:</b><br>
-	    <% i=-1;Question.find_by_id(record.question_id).choice_details.split(' ').each do |choice| %>
+	    <% i=-1;Question.find_by_id(record.question_id).choice_details.split(/[\r][\n]/).each do |choice| %>
 	    <%=  i=i+1;check_box("m_answer_text"+'['+record.question_id.to_s+']',i, {}, choice) %>
 	    <%= choice %>
 	    <% end %>
