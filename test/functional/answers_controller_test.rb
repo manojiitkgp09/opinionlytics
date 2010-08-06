@@ -60,11 +60,20 @@ class AnswersControllerTest < ActionController::TestCase
     assert_difference('Answer.count') do
       post :saveresponse, {:survey_id => surveys(:s1).id, :question_id => q, :questiontype_id => qtype , :answer_text => atext}
     end
+    a = Answer.new(:user_id => 1, :survey_id => 1, :created_at => Time.now, :updated_at => Time.now )
+    a.id = 3
+    aq1 = AnswerQuestion.new(:answer_id => a.id, :question_id => questions(:one).id, :answer_text  => atext[q1], :created_at => Time.now, :updated_at => Time.now )
+    aq2 = AnswerQuestion.new(:answer_id => a.id, :question_id => questions(:two).id, :answer_text  => atext[q2], :created_at => Time.now, :updated_at => Time.now )
+    aq2.id = 980190964
+    aq=[]
+    aq.push(aq1)
+    aq.push(aq2)
     assert_response :success
     assert_not_nil assigns(:q1)
     assert_not_nil assigns(:answer)
+    assert_equal a,assigns("answer") 
+    assert_equal  aq2, assigns("q1")
   end
-
 end
 
 
